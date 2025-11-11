@@ -1,0 +1,11 @@
+{
+    "asset": "e59208c1e0253eb498816dce5aec75d4",
+    "fileName": "019a709e-b729-74fc-a7bd-4f2f7a7179cb.pose.json",
+    "prompt": "Make an idle animation where player stand in style and right hand up that hold floating knife",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 691189983,
+    "w3CTraceId": "aafd75628eb40924586eb7c0100e4d11",
+    "isTrimmed": false
+}
