@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace FXnRXn
 {
-    public class WindowRoot : MonoBehaviour
+    public class InputClickHandler : MonoBehaviour
     {
 	    protected void SetActive(Transform trans,bool state = true) 
 	    {

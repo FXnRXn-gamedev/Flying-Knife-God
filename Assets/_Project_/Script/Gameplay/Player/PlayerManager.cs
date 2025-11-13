@@ -13,6 +13,7 @@ namespace FXnRXn
 		private void Awake()
 		{
 			if (Instance == null) Instance = this;
+			OnAwake();
 		}
 
 		#endregion
@@ -55,19 +56,29 @@ namespace FXnRXn
 
         #region Unity Callbacks
 
-        private void Start()
+        private void OnAwake()
         {
 	        if (_animator == null) _animator = GetComponentInChildren<Animator>();
 	        if (_characterController == null) _characterController = GetComponent<CharacterController>();
         }
-        
+
+        private void Update()
+        {
+	        if (JoyStickController.Instance != null)
+	        {
+		        Move(JoyStickController.Instance.GetMoveAxis());
+	        }
+        }
+
         #endregion
 
-        #region Cutom Method
+        #region Custom Method
 
         public void Move(Vector3 direction) //-- Update called from PlayWindow script
         {
 	        Vector3 moveDir = new Vector3(direction.x, 0f, direction.z);
+	        if (moveDir.magnitude >= 1f) moveDir.Normalize();
+	        
 	        HandleGravity();
 	        if (wantGravity)
 	        {
@@ -80,8 +91,18 @@ namespace FXnRXn
 	        {
 		        _characterController.Move(moveDir * moveSpeed * Time.deltaTime);
 	        }
+
+	        _animator.SetFloat(CurrentSpeedHash, moveDir.magnitude);
+	        // -- Animate the player (Idle/Run)
+	        // if (moveDir != Vector3.zero)
+	        // {
+		       //  _animator.SetFloat(CurrentSpeedHash, moveDir.magnitude);
+	        // }
+	        // else
+	        // {
+		       //  _animator.SetFloat(CurrentSpeedHash, 0f);
+	        // }
 	        
-	        //_animator.SetFloat(CurrentSpeedHash, Mathf.Abs(direction.magnitude));
         }
 
         private void HandleGravity()
@@ -118,7 +139,7 @@ namespace FXnRXn
         //--------------------------------------------------------------------------------------------------------------
 
         #region Helper
-
+		public Animator GetAnimator() => _animator;
         #endregion
         
     }

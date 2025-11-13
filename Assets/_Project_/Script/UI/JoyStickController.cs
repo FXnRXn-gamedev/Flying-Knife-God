@@ -7,8 +7,17 @@ using UnityEngine.EventSystems;
 
 namespace FXnRXn
 {
-    public class PlayWindow : WindowRoot
+    public class JoyStickController : InputClickHandler
     {
+        #region Singleton
+        public static JoyStickController Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance == null) Instance = this;
+        }
+
+        #endregion
 
         #region Properties
 
@@ -33,14 +42,6 @@ namespace FXnRXn
             if(ArrowRoot) SetActive(ArrowRoot, false);
             if(imgDirBG) defaultPos = imgDirBG.transform.position;
             RegisterMoveEvents();
-        }
-
-        private void Update()
-        {
-            if (PlayerManager.Instance)
-            {
-                PlayerManager.Instance.Move(moveDir);
-            }
         }
 
         #endregion
@@ -114,6 +115,8 @@ namespace FXnRXn
         //--------------------------------------------------------------------------------------------------------------
 
         #region Helper
+
+        public Vector3 GetMoveAxis() => moveDir;
 
         #endregion
 
