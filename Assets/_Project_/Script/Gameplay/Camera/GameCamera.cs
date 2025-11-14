@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 
 
@@ -99,10 +100,10 @@ namespace FXnRXn
 	        {
 		        case ECameraType.GameCamera:
 			        isFollowPlayer = true;
-			        StartCoroutine(TransitionCameraToTarget(42f, 35f, 1.8f, 36f, 1f, ECameraType.GameCamera, (e) =>
+			        TransitionCameraToTarget(42f, 35f, 1.8f, 36f, 1f, ECameraType.GameCamera, (e) =>
 			        {
-				        Debug.Log(e);
-			        }));
+				        if (GameManager.Instance != null) GameManager.Instance.GameStarted();
+			        });
 			        
 			        break;
 		        case ECameraType.GameUICamera:
@@ -111,10 +112,10 @@ namespace FXnRXn
 			        cameraHeightOffset = 12f;
 			        cameraHorizontalOffset = 0f;
 			        cameraTiltOffset = 20f;
-			       StartCoroutine(TransitionCameraToTarget(20f, 12f, 0f, 20f, 1f, ECameraType.GameUICamera, (e) =>
+			       TransitionCameraToTarget(20f, 12f, 0f, 20f, 1f, ECameraType.GameUICamera, (e) =>
 			        {
-				        Debug.Log(e);
-			        }));
+				        
+			        });
 			        break;
 	        }
         }
@@ -152,7 +153,7 @@ namespace FXnRXn
 	        lastAngleY = newAngleY;
         }
         
-        private IEnumerator TransitionCameraToTarget(float targetDistance, float targetHeightOffset, float targetHorizontalOffset, float targetTiltOffset, float duration, ECameraType type, Action<bool> callback)
+        private async UniTask TransitionCameraToTarget(float targetDistance, float targetHeightOffset, float targetHorizontalOffset, float targetTiltOffset, float duration, ECameraType type, Action<bool> callback)
         {
 	        // Store starting values
 	        float startDistance = cameraDistance;
@@ -176,7 +177,7 @@ namespace FXnRXn
 		        cameraHorizontalOffset = Mathf.Lerp(startHorizontalOffset, targetHorizontalOffset, t);
 		        cameraTiltOffset = Mathf.Lerp(startTiltOffset, targetTiltOffset, t);
 
-		        yield return null;
+		        await UniTask.Yield();
 	        }
 
 	        // Ensure final values are exactly the target values

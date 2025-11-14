@@ -104,8 +104,7 @@ namespace FXnRXn
                 {
                     moveDir = Vector3.zero;
                 }
-
-               // this.moveDir = joystickDir.normalized;
+                
             });
         }
 

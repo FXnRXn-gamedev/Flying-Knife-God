@@ -66,7 +66,7 @@ namespace FXnRXn
 
         #endregion
 
-        #region Cutom Method
+        #region Custom Method
 
         #endregion
 

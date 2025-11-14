@@ -36,7 +36,11 @@ namespace FXnRXn
 
         #region Custom Method
 
-        
+        public void GameStarted()
+        {
+	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.isRoundStarted = true;
+	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.CreateEnemyAction?.Invoke();
+        }
 
         #endregion
 
@@ -47,6 +51,13 @@ namespace FXnRXn
 
         #endregion
     
+    }
+
+    public enum LevelType
+    {
+	    Farm,
+	    TheBeach,
+	    TheWildWest
     }
 }
 

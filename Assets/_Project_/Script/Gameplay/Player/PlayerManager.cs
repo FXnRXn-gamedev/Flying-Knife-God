@@ -91,18 +91,35 @@ namespace FXnRXn
 	        {
 		        _characterController.Move(moveDir * moveSpeed * Time.deltaTime);
 	        }
-
-	        _animator.SetFloat(CurrentSpeedHash, moveDir.magnitude);
-	        // -- Animate the player (Idle/Run)
-	        // if (moveDir != Vector3.zero)
-	        // {
-		       //  _animator.SetFloat(CurrentSpeedHash, moveDir.magnitude);
-	        // }
-	        // else
-	        // {
-		       //  _animator.SetFloat(CurrentSpeedHash, 0f);
-	        // }
 	        
+	        
+	        //-- Animate the player (Idle/Run)
+	        _animator.SetFloat(CurrentSpeedHash, moveDir.magnitude);
+	        
+	        //-- Handle run VFX based on movement speed
+	        HandleRunVfx(moveDir.magnitude);
+        }
+
+        private void HandleRunVfx(float speed)
+        {
+	        if(runVfx == null) return;
+	        // Consider "running" if speed is above a small threshold
+	        const float runThreshold = 0.1f;
+
+	        if (speed > runThreshold)
+	        {
+		        if (!runVfx.isPlaying)
+		        {
+			        runVfx.Play();
+		        }
+	        }
+	        else
+	        {
+		        if (runVfx.isPlaying)
+		        {
+			        runVfx.Stop();
+		        }
+	        }
         }
 
         private void HandleGravity()
