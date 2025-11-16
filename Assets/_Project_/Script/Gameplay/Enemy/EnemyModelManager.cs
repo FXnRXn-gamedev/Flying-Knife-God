@@ -12,8 +12,8 @@ namespace FXnRXn
 
         #region Properties
 
-        [Header("Settings")] [HorizontalLine(color: EColor.Green)]
-        
+        [Header("Settings")] [HorizontalLine(color: EColor.Green)] 
+        [SerializeField] private EEnemyType enemyType;
         [SerializeField] private List<GameObject> ModelList;
         [ReadOnly][SerializeField] private EnemyController enemyController;
         [SerializeField] private int enemyLevel;
@@ -31,7 +31,7 @@ namespace FXnRXn
 
         #endregion
 
-        #region Cutom Method
+        #region Custom Method
 
         #endregion
 
@@ -39,6 +39,8 @@ namespace FXnRXn
         //--------------------------------------------------------------------------------------------------------------
 
         #region Helper
+        public List<GameObject> ModelListGetter() => ModelList;
+        public EEnemyType GetEnemyType => enemyType;
 
         #endregion
 

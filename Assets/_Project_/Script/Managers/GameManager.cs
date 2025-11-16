@@ -23,6 +23,8 @@ namespace FXnRXn
         [HorizontalLine(color: EColor.Green)]
         [ReadOnly] [SerializeField] private int targetFPS = 120;
         
+        public EGameState GameState { get; set; }
+        public Action<EGameState> GameStateAction;
         #endregion
 
         #region Unity Callbacks
@@ -30,6 +32,8 @@ namespace FXnRXn
         private void Start()
         {
 	        Application.targetFrameRate = targetFPS;
+	        SetGameState(EGameState.GameUIStart);
+	        
         }
 
         #endregion
@@ -40,6 +44,14 @@ namespace FXnRXn
         {
 	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.isRoundStarted = true;
 	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.CreateEnemyAction?.Invoke();
+	        SetGameState(EGameState.GameStart);
+	        
+        }
+
+        public void SetGameState(EGameState state)
+        {
+	        GameStateAction?.Invoke(state);
+	        GameState = state;
         }
 
         #endregion
@@ -58,6 +70,21 @@ namespace FXnRXn
 	    Farm,
 	    TheBeach,
 	    TheWildWest
+    }
+
+    public enum EGameState
+    {
+	    GameUIStart,
+	    GameStart,
+	    GameOver
+    }
+
+    public enum EEnemyType
+    {
+	    Bean,
+	    Blueberry,
+	    Carrot,
+	    ChickenLeg
     }
 }
 

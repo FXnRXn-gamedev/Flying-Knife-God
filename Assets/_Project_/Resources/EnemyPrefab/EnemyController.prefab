@@ -65,9 +65,10 @@ GameObject:
   - component: {fileID: 7712204210409721126}
   - component: {fileID: 3528656843290309360}
   - component: {fileID: 2766642982594927380}
-  m_Layer: 0
+  - component: {fileID: 7413269138556180735}
+  m_Layer: 7
   m_Name: EnemyController
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,3 +156,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7413269138556180735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671163092005989894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf1885c08c61194fb5416bcf31d6993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.SunFlower
+  fromPool: 1
+  speed: 0
+  grav: 0
+  liftTime: 0
+  offsetPos: {x: 0, y: 0, z: 0}

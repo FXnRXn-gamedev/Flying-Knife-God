@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine.AI;
 
@@ -39,6 +40,8 @@ namespace FXnRXn
         private NavMeshAgent                        _enemyNavAgent;
         private Animator                            _enemyAnim;
         private EnemyModelManager                   _enemyModelManager;
+        private MeshRenderer[]                      _renderers;
+        private FragmentController                  _fragmentControllerSc;
 
 
         #endregion
@@ -47,17 +50,20 @@ namespace FXnRXn
 
         private void OnAwake()
         {
+            
+        }
+
+        private void Start()
+        {
             if (_enemyNavAgent == null) _enemyNavAgent = GetComponent<NavMeshAgent>();
             if (_enemyModelManager == null) _enemyModelManager = GetComponentInChildren<EnemyModelManager>();
+            
             enemyHP = maxEnemyHP;
+            isAIMoving = true;
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                DecreaseHP(1);
-            }
             
             if (isAIMoving)
             {
@@ -102,9 +108,17 @@ namespace FXnRXn
 
         #region Custom Method
 
-        private void DecreaseHP(int value)
+        public void DecreaseHP(int value)
         {
             enemyHP -= value;
+            
+            // Effect
+            HurtEffect();
+            if (enemyHP > 0)
+            {
+                CreateFragmentAndEffect();
+            }
+            
 
             if (enemyHP <= 0)
             {
@@ -127,6 +141,7 @@ namespace FXnRXn
             else if(state == EEnemyState.Death)
             {
                 _enemyNavAgent.isStopped = true;
+                isAIMoving = false;
             }
             currentEnemyState = state;
         }
@@ -142,6 +157,59 @@ namespace FXnRXn
                 else
                 {
                     _enemyAnim = GetComponentInChildren<Animator>();
+                }
+            }
+        }
+
+
+
+
+        private void CreateFragmentAndEffect()
+        {
+            if (_fragmentControllerSc == null)
+            {
+                _fragmentControllerSc = GetComponent<FragmentController>();
+                _fragmentControllerSc.InitData();
+            }
+
+            GameObject fragment  = _fragmentControllerSc.CreateItem();
+            if (_enemyModelManager != null && fragment != null)
+            {
+                fragment.GetComponent<MeshRenderer>().material =
+                    MaterialManager.Instance?.GetEnemyMaterialList(_enemyModelManager.GetEnemyType);
+            }
+            //
+        }
+
+        private async UniTask HurtEffect()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+
+            _renderers = GetComponentsInChildren<MeshRenderer>();
+
+            if (_renderers.Length > 0)
+            {
+                for (int i = 0; i < _renderers.Length; i++)
+                {
+                    if(_renderers[i] == null) continue;
+                    for (int j = 0; j < _renderers[i].materials.Length; j++)
+                    {
+                        _renderers[i].materials[j].color = Color.red;
+                    }
+                }
+            }
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+            
+            if (_renderers.Length > 0)
+            {
+                for (int i = 0; i < _renderers.Length; i++)
+                {
+                    if(_renderers[i] == null) continue;
+                    for (int j = 0; j < _renderers[i].materials.Length; j++)
+                    {
+                        _renderers[i].materials[j].color = Color.white;
+                    }
                 }
             }
         }

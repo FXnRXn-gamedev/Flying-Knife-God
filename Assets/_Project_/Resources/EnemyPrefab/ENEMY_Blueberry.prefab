@@ -926,6 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341c12227a31f4744866fb36d90ea299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.EnemyModelManager
+  enemyType: 1
   ModelList:
   - {fileID: 276352539427309914}
   - {fileID: 1472911491862242302}
