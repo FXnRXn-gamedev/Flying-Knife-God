@@ -931,7 +931,6 @@ MonoBehaviour:
   - {fileID: 276352539427309914}
   - {fileID: 1472911491862242302}
   enemyController: {fileID: 0}
-  enemyLevel: 0
   _anim: {fileID: 297759667526886637}
 --- !u!1 &7802116535980134494
 GameObject:

@@ -1,8 +1,11 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using FXnRXn.ObjectPool;
 using NaughtyAttributes;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 
 namespace FXnRXn
@@ -15,7 +18,6 @@ namespace FXnRXn
         private void Awake()
         {
             if (Instance == null) Instance = this;
-            OnAwake();
         }
 
         #endregion
@@ -25,41 +27,37 @@ namespace FXnRXn
         [Header("Settings")] [HorizontalLine(color: EColor.Blue)] 
         [SerializeField] private EEnemyState        currentEnemyState;
         [SerializeField] private bool               isAIMoving;
-
+        
 
         [Header("Stats")] [HorizontalLine(color: EColor.Green)] 
-        [SerializeField] private int                enemyHP;
-        [SerializeField] private int                maxEnemyHP;
-        [SerializeField] private int                enemyATK;
-        [SerializeField] private float              attackDistance = 3f;
-        [SerializeField] private float              enemyATKTime;
-        [SerializeField] private float              currentATKTime;
-        [SerializeField] private int                expValue = 1;
-        [SerializeField] private int                expNum = 1;
+        [ReadOnly][SerializeField] private int                enemyHP;
+        [ReadOnly][SerializeField] private int                maxEnemyHP;
+        [ReadOnly][SerializeField] private int                enemyATK;
+        [ReadOnly][SerializeField] private float              attackDistance = 3f;
+        [ReadOnly][SerializeField] private float              enemyATKTime;
+        [SerializeField] private float                        currentATKTime;
+        [ReadOnly][SerializeField] private int                expValue = 1;
+        [ReadOnly][SerializeField] private int                expNum = 1;
 
         private NavMeshAgent                        _enemyNavAgent;
         private Animator                            _enemyAnim;
         private EnemyModelManager                   _enemyModelManager;
         private MeshRenderer[]                      _renderers;
         private FragmentController                  _fragmentControllerSc;
+        private Dictionary<int, List<GameObject>>   _hurtModelList = new Dictionary<int, List<GameObject>>();
 
 
         #endregion
 
         #region Unity Callbacks
 
-        private void OnAwake()
-        {
-            
-        }
-
-        private void Start()
+        public void InitData()
         {
             if (_enemyNavAgent == null) _enemyNavAgent = GetComponent<NavMeshAgent>();
             if (_enemyModelManager == null) _enemyModelManager = GetComponentInChildren<EnemyModelManager>();
             
-            enemyHP = maxEnemyHP;
             isAIMoving = true;
+            EnemyData();
         }
 
         private void Update()
@@ -78,6 +76,7 @@ namespace FXnRXn
                     case EEnemyState.Attack:
                         break;
                     case EEnemyState.Death:
+                        
                         break;
                 }
             }
@@ -124,7 +123,104 @@ namespace FXnRXn
             {
                 enemyHP = 0;
                 ChangeState(EEnemyState.Death);
+                EnemyDeathAndEffect();
+                if (isAIMoving)
+                {
+                    EnemyDie();
+                }
             }
+        }
+
+        private void EnemyDie()
+        {
+            isAIMoving = false;
+            if(GetComponent<CapsuleCollider>()) GetComponent<CapsuleCollider>().enabled = false;
+            if (_enemyModelManager == null) _enemyModelManager = GetComponentInChildren<EnemyModelManager>();
+
+            CreateExpPrefab();
+        }
+
+        private void CreateExpPrefab()
+        {
+            if (ExpPool.Instance == null) return;
+
+            ExpPool.Instance.SpawnExp(transform.position, expNum, expNum);
+        }
+
+        private async UniTask EnemyDeathAndEffect()
+        {
+            await UniTask.Yield();
+            Transform effectTransform = null;
+            
+            // Get death effect from pool instead of instantiating it
+            if (PoolManager.Instance != null && PoolManager.Instance.HasPool("EnemyDeathEffect"))
+            {
+                effectTransform = PoolManager.Instance.Get<Transform>("EnemyDeathEffect");
+            }
+            
+            if (effectTransform != null)
+            {
+                var deathEffect = effectTransform.gameObject;
+                deathEffect.transform.SetParent(transform);
+                deathEffect.transform.localPosition = Vector3.zero;
+
+                var ps = deathEffect.GetComponent<ParticleSystem>();
+                if (ps != null) ps.Play();
+            }
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+
+            // Return effect to its pool
+            if (effectTransform != null && PoolManager.Instance != null)
+            {
+                effectTransform.SetParent(DeathEffectPool.Instance != null 
+                    ? DeathEffectPool.Instance.transform 
+                    : null);
+                PoolManager.Instance.Return(effectTransform);
+            }
+            
+            // Return enemy + controller via EnemySystemManager so enemySurviveList and pools stay in sync
+            if (EnemySystemManager.Instance != null)
+            {
+                GameObject controller = gameObject;
+                GameObject enemy = null;
+
+                if (controller.transform.childCount > 0)
+                {
+                    enemy = controller.transform.GetChild(0).gameObject;
+                }
+
+                if (enemy != null)
+                {
+                    EnemySystemManager.Instance.ReturnEnemyToPool(controller, enemy);
+                }
+                else
+                {
+                    // Fallback if child is missing but PoolManager exists
+                    if (PoolManager.Instance != null)
+                    {
+                        PoolManager.Instance.Return(controller.transform);
+                    }
+                    else
+                    {
+                        Destroy(controller);
+                    }
+                }
+            }
+            else
+            {
+                // Return enemy to its pool instead of destroying it
+                if (PoolManager.Instance != null)
+                {
+                    PoolManager.Instance.Return(transform);
+                }
+                else
+                {
+                    // Fallback if PoolManager is missing (safety)
+                    Destroy(gameObject);
+                }
+            }
+
         }
 
         private void ChangeState(EEnemyState state)
@@ -141,7 +237,6 @@ namespace FXnRXn
             else if(state == EEnemyState.Death)
             {
                 _enemyNavAgent.isStopped = true;
-                isAIMoving = false;
             }
             currentEnemyState = state;
         }
@@ -162,6 +257,166 @@ namespace FXnRXn
         }
 
 
+        public async UniTask EnemyData()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+            
+            if (_enemyModelManager == null) _enemyModelManager = GetComponentInChildren<EnemyModelManager>();
+            if(_enemyModelManager == null) return;
+
+            if (_enemyModelManager.enemyLevel == 0)
+            {
+                enemyHP = 2;
+                maxEnemyHP = 2;
+                enemyATK = 1;
+                attackDistance = 3;
+                enemyATKTime = 1;
+                expValue = 1;
+                expNum = 1;
+            }
+            else
+            {
+                if(WorldData.enemyDataSOList.Count <= 0) InventoryManager.Instance?.InitData();
+            
+                EnemyDataSO enemyData			= new EnemyDataSO();
+                for (int i = 0; i < WorldData.enemyDataSOList.Count; i++)
+                {
+                    if (WorldData.enemyDataSOList[i].lvl == _enemyModelManager.enemyLevel)
+                    {
+                        enemyData = WorldData.enemyDataSOList[i];
+                        enemyHP = enemyData.HP;
+                        maxEnemyHP = enemyData.HP;
+                        enemyATK = enemyData.AttackValue;
+                        attackDistance = enemyData.AttackRange;
+                        enemyATKTime = enemyData.AttackTime;
+                        expValue = enemyData.ExpValue;
+                        expNum = enemyData.ExpNum;
+                        break;
+                    }
+                }
+            }
+
+            CheckEnemyHurtModelList();
+        }
+
+        private void CheckEnemyHurtModelList()
+        {
+            _hurtModelList.Clear();
+
+            if (enemyHP == _enemyModelManager.ModelListGetter().Count)
+            {
+                for (int i = 0; i < enemyHP; i++)
+                {
+                    List<GameObject> modelList = new List<GameObject>();
+                    modelList.Add(_enemyModelManager.ModelListGetter()[i]);
+                    if (!_hurtModelList.ContainsKey(i))
+                    {
+                        _hurtModelList.Add(i, modelList);
+                    }
+                    else
+                    {
+                        _hurtModelList[i] = modelList;
+                    }
+                    
+                }
+            }
+            else if (enemyHP < _enemyModelManager.ModelListGetter().Count)
+            {
+                int modelIndex = 0;
+                while (modelIndex < _enemyModelManager.ModelListGetter().Count)
+                {
+                    for (int i = 0; i < enemyHP; i++)
+                    {
+                        if (modelIndex >= _enemyModelManager.ModelListGetter().Count) break;
+                        List<GameObject> model = new List<GameObject>();
+                        model.Add(_enemyModelManager.ModelListGetter()[modelIndex]);
+                        if (!_hurtModelList.ContainsKey(i))
+                        {
+                            _hurtModelList.Add(i, model);
+                        }
+                        else
+                        {
+                            List<GameObject> tempModel = _hurtModelList[i];
+                            tempModel.Add(_enemyModelManager.ModelListGetter()[modelIndex]);
+                            _hurtModelList[i] = tempModel;
+                        }
+
+                        modelIndex++;
+                    }
+                }
+            }
+            else if (enemyHP > _enemyModelManager.ModelListGetter().Count)
+            {
+                for (int i = 0; i < enemyHP; i++)
+                {
+                    List<GameObject> model = new List<GameObject>();
+                    if (!_hurtModelList.ContainsKey(i))
+                    {
+                        _hurtModelList.Add(i, model);
+                    }
+                    else
+                    {
+                        List<GameObject> tempModel = _hurtModelList[i];
+                        tempModel.Add(_enemyModelManager.ModelListGetter()[i]);
+                        _hurtModelList[i] = tempModel;
+                    }
+                }
+
+                for (int i = _enemyModelManager.ModelListGetter().Count - 2; i >= 0; i--)
+                {
+                    List<GameObject> model = new List<GameObject>();
+                    model.Add(_enemyModelManager.ModelListGetter()[i]);
+                    if (!_hurtModelList.ContainsKey(i))
+                    {
+                        _hurtModelList.Add(i, model);
+                    }
+                    else
+                    {
+                        List<GameObject> tempModel = _hurtModelList[i];
+                        tempModel.Add(_enemyModelManager.ModelListGetter()[i]);
+                        _hurtModelList[i] = tempModel;
+                    }
+                }
+                
+                
+                List<GameObject> models = new List<GameObject>();
+                models.Add(_enemyModelManager.ModelListGetter()[_enemyModelManager.ModelListGetter().Count - 1]);
+                if (!_hurtModelList.ContainsKey(enemyHP - 1))
+                {
+                    _hurtModelList.Add(enemyHP - 1, models);
+                }
+                else
+                {
+                    List<GameObject> tempModel = _hurtModelList[enemyHP - 1];
+                    tempModel.Add(_enemyModelManager.ModelListGetter()[_enemyModelManager.ModelListGetter().Count - 1]);
+                    _hurtModelList[enemyHP - 1] = tempModel;
+                }
+            }
+            
+            
+            
+        }
+
+        private void SliceModel()
+        {
+            int value = maxEnemyHP - enemyHP;
+            if(value == 0) return;
+
+            for (int i = 0; i < value; i++)
+            {
+                if (_hurtModelList.ContainsKey(i))
+                {
+                    List<GameObject> modelList = _hurtModelList[i];
+                    if (modelList.Count > 0)
+                    {
+                        for (int j = 0; j < modelList.Count; j++)
+                        {
+                            modelList[j].gameObject.SetActive(false);
+                        }
+                    }
+                }
+            }
+        }
 
 
         private void CreateFragmentAndEffect()
@@ -179,6 +434,8 @@ namespace FXnRXn
                     MaterialManager.Instance?.GetEnemyMaterialList(_enemyModelManager.GetEnemyType);
             }
             //
+
+            SliceModel();
         }
 
         private async UniTask HurtEffect()

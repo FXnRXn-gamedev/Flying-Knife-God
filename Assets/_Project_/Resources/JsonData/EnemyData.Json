@@ -1,0 +1,138 @@
+[
+
+  {
+    "lv": 1,
+    "HP": 2,
+    "AttackValue": 1,
+    "AttackRange": 4,
+    "AttackTime": 1,
+    "ExpValue": 2,
+    "ExpNum":1
+  },
+  {
+    "lv": 2,
+    "HP": 3,
+    "AttackValue": 2,
+    "AttackRange": 4,
+    "AttackTime": 1,
+    "ExpValue": 2,
+    "ExpNum": 1
+  },
+  {
+    "lv": 3,
+    "HP": 4,
+    "AttackValue": 3,
+    "AttackRange": 4,
+    "AttackTime": 1,
+    "ExpValue": 2,
+    "ExpNum": 1
+  },
+  {
+    "lv": 4,
+    "HP": 5,
+    "AttackValue": 4,
+    "AttackRange": 4,
+    "AttackTime": 1,
+    "ExpValue": 2,
+    "ExpNum": 1
+  },
+  {
+    "lv": 5,
+    "HP": 6,
+    "AttackValue": 5,
+    "AttackRange": 5,
+    "AttackTime": 1,
+    "ExpValue": 2,
+    "ExpNum": 1
+  },
+  {
+    "lv": 6,
+    "HP": 7,
+    "AttackValue": 6,
+    "AttackRange": 5,
+    "AttackTime": 0.8,
+    "ExpValue": 3,
+    "ExpNum": 2
+  },
+  {
+    "lv": 7,
+    "HP": 8,
+    "AttackValue": 7,
+    "AttackRange": 5,
+    "AttackTime": 0.8,
+    "ExpValue": 3,
+    "ExpNum": 2
+  },
+  {
+    "lv": 8,
+    "HP": 9,
+    "AttackValue": 8,
+    "AttackRange": 6,
+    "AttackTime": 0.8,
+    "ExpValue": 3,
+    "ExpNum": 2
+  },
+  {
+    "lv": 9,
+    "HP": 10,
+    "AttackValue": 9,
+    "AttackRange": 6,
+    "AttackTime": 0.8,
+    "ExpValue": 3,
+    "ExpNum": 2
+  },
+  {
+    "lv": 10,
+    "HP": 11,
+    "AttackValue": 10,
+    "AttackRange": 6,
+    "AttackTime": 0.8,
+    "ExpValue": 3,
+    "ExpNum": 2
+  },
+  {
+    "lv": 11,
+    "HP": 12,
+    "AttackValue": 10,
+    "AttackRange": 6,
+    "AttackTime": 0.6,
+    "ExpValue": 4,
+    "ExpNum": 3
+  },
+  {
+    "lv": 12,
+    "HP": 13,
+    "AttackValue": 10,
+    "AttackRange": 6,
+    "AttackTime": 0.6,
+    "ExpValue": 4,
+    "ExpNum": 3
+  },
+  {
+    "lv": 13,
+    "HP": 14,
+    "AttackValue": 10,
+    "AttackRange": 6,
+    "AttackTime": 0.6,
+    "ExpValue": 4,
+    "ExpNum": 3
+  },
+  {
+    "lv": 14,
+    "HP": 15,
+    "AttackValue": 10,
+    "AttackRange": 6,
+    "AttackTime": 0.6,
+    "ExpValue": 4,
+    "ExpNum": 3
+  },
+  {
+    "lv": 15,
+    "HP": 16,
+    "AttackValue": 10,
+    "AttackRange": 6,
+    "AttackTime": 0.6,
+    "ExpValue": 4,
+    "ExpNum": 3
+  }
+]

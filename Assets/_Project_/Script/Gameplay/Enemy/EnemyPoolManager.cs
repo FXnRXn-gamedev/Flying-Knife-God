@@ -22,7 +22,6 @@ namespace FXnRXn.ObjectPool
 			if (Instance == null)
 			{
 				Instance = this;
-				DontDestroyOnLoad(gameObject);
 			}
 			else
 			{

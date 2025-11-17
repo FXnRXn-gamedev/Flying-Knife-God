@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using NaughtyAttributes;
+using Tayx.Graphy.Utils.NumString;
 
 
 namespace FXnRXn
@@ -37,9 +38,9 @@ namespace FXnRXn
         [HorizontalLine(color: EColor.Green)]
         [ReadOnly] [SerializeField] private float currentHP;
         [SerializeField] private float maxHP = 100f;
-        [ReadOnly] [SerializeField] private float currentLevel;
-        [ReadOnly] [SerializeField] private float currentExp;
-        [ReadOnly] [SerializeField] private float nextExp;
+        [ReadOnly] [SerializeField] private int currentLevel;
+        [ReadOnly] [SerializeField] private int currentExp;
+        private int nextExp = 10;
 
         [Header("Player Vfx Settings")]
         [HorizontalLine(color: EColor.Green)]
@@ -157,8 +158,12 @@ namespace FXnRXn
 
         #region Helper
 		public Animator GetAnimator() => _animator;
-        #endregion
-        
+		public int GetCurrentLevel => currentLevel;
+		public int GetCurrentExp => WorldData.GetPlayerExp();
+		public int GetNextExp => nextExp;
+
+		#endregion
+
     }
 }
 

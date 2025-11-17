@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using NaughtyAttributes;
+using UnityEngine.UI;
 
 
 namespace FXnRXn
@@ -33,7 +34,8 @@ namespace FXnRXn
         {
 	        Application.targetFrameRate = targetFPS;
 	        SetGameState(EGameState.GameUIStart);
-	        
+	        InventoryManager.Instance?.InitData();
+	        if(PlayerManager.Instance) AddPlayerExp(PlayerManager.Instance.GetCurrentExp);
         }
 
         #endregion
@@ -45,13 +47,21 @@ namespace FXnRXn
 	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.isRoundStarted = true;
 	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.CreateEnemyAction?.Invoke();
 	        SetGameState(EGameState.GameStart);
-	        
         }
 
         public void SetGameState(EGameState state)
         {
 	        GameStateAction?.Invoke(state);
 	        GameState = state;
+        }
+
+        public void AddPlayerExp(int value)
+        {
+	        WorldData.AddPlayerExp(value);
+	        if (LevelAndSkillPanelUI.Instance != null)
+	        {
+		        LevelAndSkillPanelUI.Instance.UpdateLevelAndSkill();
+	        }
         }
 
         #endregion

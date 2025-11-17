@@ -147,6 +147,8 @@ namespace FXnRXn
 		        Vector3 enemyPos = GetEnemySpawnPosition();
 		        part.transform.SetParent(enemyPart.transform);
 		        part.transform.position = enemyPos;
+		        
+		        part.GetComponent<EnemyController>()?.InitData();
 
 		        // Add to survive list
 		        enemySurviveList.Add(part);

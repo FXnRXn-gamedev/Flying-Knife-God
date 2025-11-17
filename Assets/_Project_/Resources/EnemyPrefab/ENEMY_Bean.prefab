@@ -906,11 +906,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341c12227a31f4744866fb36d90ea299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.EnemyModelManager
+  enemyType: 0
   ModelList:
   - {fileID: 3853529655368400717}
   - {fileID: 1710114662823404781}
   enemyController: {fileID: 0}
-  enemyLevel: 0
   _anim: {fileID: 2385529394257370342}
 --- !u!1 &7588409113981164774
 GameObject:

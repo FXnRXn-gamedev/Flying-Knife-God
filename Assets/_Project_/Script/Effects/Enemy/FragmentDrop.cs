@@ -33,25 +33,51 @@ namespace FXnRXn
             float RotateX = Random.Range(1f, 360f);
             Vector3 direction = Quaternion.Euler(45f, RotateX, 0f) * Vector3.up;
             if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().linearVelocity = direction * DropSpeed;
-
-            DestroyGameobject();
+            
         }
 
         private void Update()
         {
             if (GetComponent<Rigidbody>() != null) GetComponent<Rigidbody>().AddForce(Vector3.down * Gravity, ForceMode.Acceleration);
+
+            if (Time.time - startTime > liftTime)
+            {
+                if (!isLife)
+                {
+                    isLife = true;
+                    ChangeSize();
+                }
+            }
         }
 
-        private async UniTask DestroyGameobject()
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(liftTime));
-            
-            if(PoolManager.Instance != null) PoolManager.Instance.Return(gameObject);
-        }
+        
 
         #endregion
 
-        #region Cutom Method
+        #region Custom Method
+
+        private async UniTask ChangeSize()
+        {
+            int value = 0;
+            while (value < 50)
+            {
+                value++;
+                transform.localScale = Vector3.Max(
+                    transform.localScale - Vector3.one * 0.01f,
+                    Vector3.zero
+                );
+                await UniTask.Yield();
+            }
+            DestroyGameobject().Forget();
+        }
+        
+        
+        private async UniTask DestroyGameobject()
+        {
+            await UniTask.Yield();
+            
+            if(PoolManager.Instance != null) PoolManager.Instance.Return(gameObject);
+        }
 
         #endregion
 
