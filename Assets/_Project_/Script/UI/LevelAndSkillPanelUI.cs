@@ -39,9 +39,15 @@ namespace FXnRXn
 
         #region Custom Method
 
-        private void InitData()
+        public void InitData()
         {
-	        
+	        if (GetComponent<CanvasGroup>() != null)
+	        {
+		        GetComponent<CanvasGroup>().interactable = false;
+		        GetComponent<CanvasGroup>().blocksRaycasts = false;
+	        }
+
+	        UpdateLevelAndSkill();
         }
 
         public void UpdateLevelAndSkill()

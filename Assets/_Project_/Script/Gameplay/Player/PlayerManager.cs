@@ -35,12 +35,11 @@ namespace FXnRXn
         [ReadOnly] [SerializeField] private float jumpHeight = 2f;
         
         [Header("Player Stat Settings")]
-        [HorizontalLine(color: EColor.Green)]
-        [ReadOnly] [SerializeField] private float currentHP;
-        [SerializeField] private float maxHP = 100f;
-        [ReadOnly] [SerializeField] private int currentLevel;
-        [ReadOnly] [SerializeField] private int currentExp;
-        private int nextExp = 10;
+        public float currentHP { get; set; }
+        public float maxHP { get; set; } = 100f;
+        public int currentLevel { get; set; } = 1;
+        public int currentExp { get; set; }
+        public int nextExp { get; set; } = 10;
 
         [Header("Player Vfx Settings")]
         [HorizontalLine(color: EColor.Green)]
@@ -61,6 +60,7 @@ namespace FXnRXn
         {
 	        if (_animator == null) _animator = GetComponentInChildren<Animator>();
 	        if (_characterController == null) _characterController = GetComponent<CharacterController>();
+	        currentHP = maxHP;
         }
 
         private void Update()

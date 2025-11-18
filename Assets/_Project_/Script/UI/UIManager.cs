@@ -35,7 +35,11 @@ namespace FXnRXn
         {
 	        InitData();
         }
-        
+
+        private void Update()
+        {
+	        
+        }
 
         #endregion
 
@@ -100,6 +104,12 @@ namespace FXnRXn
 				case UIType.JoystickRoot:
 					panelName = "Joystick-Root";
 					break;
+				case UIType.LevelAndSkillPanel:
+					panelName = "LevelAndSkill-Panel";
+					break;
+				case UIType.HPSliderPanel:
+					panelName = "HPSlider-Panel";
+					break;
 			}
 			return panelName;
 		}
@@ -128,7 +138,9 @@ namespace FXnRXn
     public enum UIType
     {
 	    GamePanel,
-	    JoystickRoot
+	    JoystickRoot,
+	    LevelAndSkillPanel,
+	    HPSliderPanel
     }
 }
 

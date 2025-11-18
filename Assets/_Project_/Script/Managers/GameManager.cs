@@ -47,6 +47,14 @@ namespace FXnRXn
 	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.isRoundStarted = true;
 	        if(EnemySystemManager.Instance != null) EnemySystemManager.Instance.CreateEnemyAction?.Invoke();
 	        SetGameState(EGameState.GameStart);
+	        if (UIManager.Instance != null)
+	        {
+		        GameObject levelAndSkillPanel = UIManager.Instance.ShowUIPanel(UIType.LevelAndSkillPanel);
+		        levelAndSkillPanel.GetComponent<LevelAndSkillPanelUI>().InitData();
+		        
+		        GameObject hpPanel = UIManager.Instance.ShowUIPanel(UIType.HPSliderPanel);
+		        hpPanel.GetComponent<UIMove>().InitData();
+	        }
         }
 
         public void SetGameState(EGameState state)

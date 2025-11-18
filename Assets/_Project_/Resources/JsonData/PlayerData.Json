@@ -1,0 +1,69 @@
+[
+
+  {
+    "lv": 1,
+    "HP": 100,
+    "NextExp": 10,
+    "MoveSpeed": 15
+  },
+  {
+    "lv": 2,
+    "HP": 110,
+    "NextExp": 20,
+    "MoveSpeed": 15
+  },
+  {
+    "lv": 3,
+    "HP": 120,
+    "NextExp": 25,
+    "MoveSpeed": 15
+  },
+  {
+    "lv": 4,
+    "HP": 130,
+    "NextExp": 30,
+    "MoveSpeed": 15
+  },
+  {
+    "lv": 5,
+    "HP": 140,
+    "NextExp": 40,
+    "MoveSpeed": 15
+  },
+  {
+    "lv": 6,
+    "HP": 150,
+    "NextExp": 45,
+    "MoveSpeed": 16
+  },
+  {
+    "lv": 7,
+    "HP": 160,
+    "NextExp": 50,
+    "MoveSpeed": 17
+  },
+  {
+    "lv": 8,
+    "HP": 170,
+    "NextExp": 60,
+    "MoveSpeed": 18
+  },
+  {
+    "lv": 9,
+    "HP": 180,
+    "NextExp": 70,
+    "MoveSpeed": 19
+  },
+  {
+    "lv": 10,
+    "HP": 190,
+    "NextExp": 80,
+    "MoveSpeed": 20
+  },
+  {
+    "lv": 11,
+    "HP": 200,
+    "NextExp": 90,
+    "MoveSpeed": 20
+  }
+]
