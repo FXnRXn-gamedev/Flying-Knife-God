@@ -34,9 +34,13 @@ namespace FXnRXn
         {
 	        Application.targetFrameRate = targetFPS;
 	        SetGameState(EGameState.GameUIStart);
-	        InventoryManager.Instance?.InitData();
-	        if(PlayerManager.Instance) AddPlayerExp(PlayerManager.Instance.GetCurrentExp);
+	        InventoryManager.Instance?.InitEnemyData();
+	        InventoryManager.Instance?.InitPlayerData();
+	        if(PlayerManager.Instance != null) PlayerManager.Instance.InitData();
+	        if(PlayerManager.Instance) AddPlayerExp(PlayerManager.Instance.currentExp);
         }
+        
+        
 
         #endregion
 
@@ -55,6 +59,7 @@ namespace FXnRXn
 		        GameObject hpPanel = UIManager.Instance.ShowUIPanel(UIType.HPSliderPanel);
 		        hpPanel.GetComponent<UIMove>().InitData();
 	        }
+	        
         }
 
         public void SetGameState(EGameState state)
@@ -62,15 +67,23 @@ namespace FXnRXn
 	        GameStateAction?.Invoke(state);
 	        GameState = state;
         }
-
+        
         public void AddPlayerExp(int value)
         {
 	        WorldData.AddPlayerExp(value);
+	        if (PlayerManager.Instance != null) PlayerManager.Instance.currentExp = WorldData.GetPlayerExp();
 	        if (LevelAndSkillPanelUI.Instance != null)
 	        {
 		        LevelAndSkillPanelUI.Instance.UpdateLevelAndSkill();
 	        }
         }
+		
+        public void IncreaseLevel()
+        {
+	        WorldData.WorldLevel += 1;
+	       if(PlayerManager.Instance != null) PlayerManager.Instance.InitData();
+        }
+        
 
         #endregion
 
@@ -78,6 +91,24 @@ namespace FXnRXn
         //--------------------------------------------------------------------------------------------------------------
 
         #region Helper
+
+        [Button]
+        private void DebugAddExp()
+        {
+	        AddPlayerExp(100);
+        }
+        
+        [Button]
+        private void DebugAddHP()
+        {
+	        PlayerManager.Instance.AddHP(10);
+        }
+        
+        [Button]
+        private void DebugResetHP()
+        {
+	        PlayerManager.Instance.ResetHP(20);
+        }
 
         #endregion
     

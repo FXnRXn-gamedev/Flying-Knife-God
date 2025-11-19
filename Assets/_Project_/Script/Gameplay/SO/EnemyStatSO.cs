@@ -5,7 +5,7 @@ using UnityEngine;
 namespace FXnRXn
 {
 	[CreateAssetMenu()]
-	public class EnemyDataSO : ScriptableObject
+	public class EnemyStatSO : ScriptableObject
 	{
 		public int lvl;
 		public int HP;

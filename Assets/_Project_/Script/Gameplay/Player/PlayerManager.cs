@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using Tayx.Graphy.Utils.NumString;
 
@@ -33,13 +34,17 @@ namespace FXnRXn
         [SerializeField] private bool wantGravity = false;
         [ReadOnly] [SerializeField] private float gravity = -20f;
         [ReadOnly] [SerializeField] private float jumpHeight = 2f;
-        
+
         [Header("Player Stat Settings")]
-        public float currentHP { get; set; }
-        public float maxHP { get; set; } = 100f;
-        public int currentLevel { get; set; } = 1;
+        public float currentHP
+        {
+	        get; 
+	        set;
+        }
+        public float maxHP { get; set; }
+        public int currentLevel { get; set; }
         public int currentExp { get; set; }
-        public int nextExp { get; set; } = 10;
+        public int nextExp { get; set; }
 
         [Header("Player Vfx Settings")]
         [HorizontalLine(color: EColor.Green)]
@@ -60,7 +65,16 @@ namespace FXnRXn
         {
 	        if (_animator == null) _animator = GetComponentInChildren<Animator>();
 	        if (_characterController == null) _characterController = GetComponent<CharacterController>();
-	        currentHP = maxHP;
+        }
+
+        private void Start()
+        {
+	        InitData();
+        }
+
+        public void InitData()
+        {
+	        PlayerData();
         }
 
         private void Update()
@@ -80,9 +94,9 @@ namespace FXnRXn
 	        Vector3 moveDir = new Vector3(direction.x, 0f, direction.z);
 	        if (moveDir.magnitude >= 1f) moveDir.Normalize();
 	        
-	        HandleGravity();
 	        if (wantGravity)
 	        {
+		        HandleGravity();
 		        // Separate horizontal and vertical movement
 		        Vector3 horizontalMovement = moveDir * moveSpeed * Time.deltaTime;
 		        Vector3 verticalMovement = new Vector3(0, _playerVelocity.y, 0) * Time.deltaTime;
@@ -100,7 +114,7 @@ namespace FXnRXn
 	        //-- Handle run VFX based on movement speed
 	        HandleRunVfx(moveDir.magnitude);
         }
-
+        
         private void HandleRunVfx(float speed)
         {
 	        if(runVfx == null) return;
@@ -151,6 +165,60 @@ namespace FXnRXn
 	        }
         }
 
+        private async UniTaskVoid PlayerData()
+        {
+	        await UniTask.Delay(TimeSpan.FromSeconds(0.01f));
+	        
+	        currentLevel = currentLevel == 0 ? 1 : WorldData.WorldLevel;
+	        if(WorldData.playerStatSOList.Count <= 0) InventoryManager.Instance?.InitPlayerData();
+
+	        PlayerStatSO playerStat = new PlayerStatSO();
+	        for (int i = 0; i < WorldData.playerStatSOList.Count; i++)
+	        {
+		        if (WorldData.playerStatSOList[i].lvl == currentLevel)
+		        {
+			        playerStat = WorldData.playerStatSOList[i];
+			        break;
+		        }
+	        }
+
+	        if (playerStat.lvl == 0)
+	        {
+		        playerStat.hp = 100;
+		        playerStat.nextExp = 10;
+		        playerStat.moveSpeed = 9f;
+	        }
+
+	        maxHP = playerStat.hp;
+	        nextExp = playerStat.nextExp;
+	        moveSpeed = playerStat.moveSpeed;
+	        currentHP = playerStat.hp;
+	        
+	        if(LevelAndSkillPanelUI.Instance != null) LevelAndSkillPanelUI.Instance.SeekPlayerLevelData(currentLevel);
+        }
+
+        public void ResetHP(int value)
+        {
+	        if (currentHP <= value)
+	        {
+		        currentHP = 0;
+	        }
+	        else
+	        {
+		        currentHP -= value;
+	        }
+	        
+	        UIMove.Instance.UpdateHPUISlider(currentHP, maxHP);
+        }
+
+        public void AddHP(int value)
+        {
+	        currentHP += value;
+	        if (currentHP > maxHP) currentHP = maxHP;
+	        
+	        UIMove.Instance.UpdateHPUISlider(currentHP, maxHP);
+        }
+
         #endregion
 
         //--------------------------------------------------------------------------------------------------------------
@@ -158,9 +226,6 @@ namespace FXnRXn
 
         #region Helper
 		public Animator GetAnimator() => _animator;
-		public int GetCurrentLevel => currentLevel;
-		public int GetCurrentExp => WorldData.GetPlayerExp();
-		public int GetNextExp => nextExp;
 
 		#endregion
 

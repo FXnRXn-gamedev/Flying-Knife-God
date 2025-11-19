@@ -264,6 +264,8 @@ namespace FXnRXn
             if (_enemyModelManager == null) _enemyModelManager = GetComponentInChildren<EnemyModelManager>();
             if(_enemyModelManager == null) return;
 
+            _enemyModelManager.enemyLevel = WorldData.WorldLevel;
+
             if (_enemyModelManager.enemyLevel == 0)
             {
                 enemyHP = 2;
@@ -276,21 +278,21 @@ namespace FXnRXn
             }
             else
             {
-                if(WorldData.enemyDataSOList.Count <= 0) InventoryManager.Instance?.InitData();
+                if(WorldData.enemyStatSOList.Count <= 0) InventoryManager.Instance?.InitEnemyData();
             
-                EnemyDataSO enemyData			= new EnemyDataSO();
-                for (int i = 0; i < WorldData.enemyDataSOList.Count; i++)
+                EnemyStatSO enemyStat			= new EnemyStatSO();
+                for (int i = 0; i < WorldData.enemyStatSOList.Count; i++)
                 {
-                    if (WorldData.enemyDataSOList[i].lvl == _enemyModelManager.enemyLevel)
+                    if (WorldData.enemyStatSOList[i].lvl == _enemyModelManager.enemyLevel)
                     {
-                        enemyData = WorldData.enemyDataSOList[i];
-                        enemyHP = enemyData.HP;
-                        maxEnemyHP = enemyData.HP;
-                        enemyATK = enemyData.AttackValue;
-                        attackDistance = enemyData.AttackRange;
-                        enemyATKTime = enemyData.AttackTime;
-                        expValue = enemyData.ExpValue;
-                        expNum = enemyData.ExpNum;
+                        enemyStat = WorldData.enemyStatSOList[i];
+                        enemyHP = enemyStat.HP;
+                        maxEnemyHP = enemyStat.HP;
+                        enemyATK = enemyStat.AttackValue;
+                        attackDistance = enemyStat.AttackRange;
+                        enemyATKTime = enemyStat.AttackTime;
+                        expValue = enemyStat.ExpValue;
+                        expNum = enemyStat.ExpNum;
                         break;
                     }
                 }

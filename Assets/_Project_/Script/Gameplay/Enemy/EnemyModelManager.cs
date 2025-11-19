@@ -16,7 +16,7 @@ namespace FXnRXn
         [SerializeField] private EEnemyType enemyType;
         [SerializeField] private List<GameObject> ModelList;
         [ReadOnly][SerializeField] private EnemyController enemyController;
-        public int enemyLevel { get; set; } = 1;
+        public int enemyLevel { get; set; }
 
         public Animator _anim;
 

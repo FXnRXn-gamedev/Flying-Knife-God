@@ -72,7 +72,7 @@ namespace FXnRXn
         #region Custom Method
         
 
-        private void UpdateHPUISlider(float current, float max)
+        public void UpdateHPUISlider(float current, float max)
         {
 	        if (current <= max)
 	        {
