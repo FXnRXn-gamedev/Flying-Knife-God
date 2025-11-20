@@ -7,10 +7,10 @@ using NaughtyAttributes;
 
 namespace FXnRXn
 {
-    public class ExpPool : MonoBehaviour
+    public class SkillPool : MonoBehaviour
     {
         #region Singleton
-		public static ExpPool Instance { get; private set; }
+		public static SkillPool Instance { get; private set; }
 
 		private void Awake()
 		{
@@ -20,14 +20,13 @@ namespace FXnRXn
 		#endregion
 
         #region Properties
-
-        
-        
-        [Header("Exp Effect Pool Settings")]  [HorizontalLine(color: EColor.Blue)]
+        [Header("Skill Pool Settings")]  [HorizontalLine(color: EColor.Blue)]
         [SerializeField] private int initialSize = 10;
         [SerializeField] private int maxSize = 30;
-        
-        private GameObject expEffectPrefab;
+
+
+        private readonly string BLENDER_SKILL_KEY = "Weapon/Blender";
+        private GameObject blenderSkillPrefab;
 
         #endregion
 
@@ -42,21 +41,20 @@ namespace FXnRXn
         #endregion
 
         #region Custom Method
-        
         private void InitData()
         {
-	        if(Resources.Load<GameObject>("Other/ExpPrefab") == null ) return;
-	        if (expEffectPrefab == null) expEffectPrefab = Resources.Load<GameObject>("Other/ExpPrefab");
+	        if(Resources.Load<GameObject>(BLENDER_SKILL_KEY) == null ) return;
+	        if (blenderSkillPrefab == null) blenderSkillPrefab = Resources.Load<GameObject>(BLENDER_SKILL_KEY);
         }
-
+        
         private async UniTask InitializePool()
         {
-	        if (PoolManager.Instance == null || expEffectPrefab == null) return;
+	        if (PoolManager.Instance == null || blenderSkillPrefab == null) return;
 	        
-	        var prefabTransform = expEffectPrefab.GetComponent<Transform>();
+	        var prefabTransform = blenderSkillPrefab.GetComponent<Transform>();
 	        if (prefabTransform == null) return;
 	        
-	        // Pool key will be deathEffectPrefab.name (e.g. "EnemyDeathEffect")
+	        
 	        await PoolManager.Instance.CreatePool(
 		        prefabTransform,
 		        initialSize,
@@ -68,11 +66,11 @@ namespace FXnRXn
         }
         
         // Spawn EXP orbs from pool and schedule auto-return
-        public void SpawnExp(Vector3 centerPosition, int amount, int expValue)
+        public void SpawnBlenderSkill(Vector3 centerPosition, int amount, SkillData skData)
         {
-	        if (PoolManager.Instance == null || expEffectPrefab == null) return;
+	        if (PoolManager.Instance == null || blenderSkillPrefab == null || skData == null) return;
 
-	        string poolKey = expEffectPrefab.name;
+	        string poolKey = blenderSkillPrefab.name;
 	        if (!PoolManager.Instance.HasPool(poolKey)) return;
 
 	        for (int i = 0; i < amount; i++)
@@ -80,20 +78,12 @@ namespace FXnRXn
 		        var expTransform = PoolManager.Instance.Get<Transform>(poolKey);
 		        if (expTransform == null) continue;
 
-		        expTransform.position = centerPosition +
-		                                new Vector3(
-			                                UnityEngine.Random.Range(0f, .5f),
-			                                0.0f,
-			                                UnityEngine.Random.Range(0f, .5f)
-		                                );
+		        expTransform.position = centerPosition;
 
-		        if (expTransform.GetComponent<ExpPrefab>() != null)
+		        if (expTransform.GetComponent<BlenderWeapon>() != null)
 		        {
-			        expTransform.GetComponent<ExpPrefab>().InitData();
-			        expTransform.GetComponent<ExpPrefab>().expNum = expValue;
+			        expTransform.GetComponent<BlenderWeapon>().Initialize(skData);
 		        }
-
-		        //ReturnAfterDelay(expTransform).Forget();
 	        }
         }
 
@@ -105,7 +95,7 @@ namespace FXnRXn
         #region Helper
 
         #endregion
-    
+
     }
 }
 

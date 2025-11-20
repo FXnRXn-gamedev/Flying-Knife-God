@@ -32,7 +32,7 @@ namespace FXnRXn
         [Header("Stats")] [HorizontalLine(color: EColor.Green)] 
         [ReadOnly][SerializeField] private int                enemyHP;
         [ReadOnly][SerializeField] private int                maxEnemyHP;
-        [ReadOnly][SerializeField] private int                enemyATK;
+        public int                enemyATK { get; set; }
         [ReadOnly][SerializeField] private float              attackDistance = 3f;
         [ReadOnly][SerializeField] private float              enemyATKTime;
         [SerializeField] private float                        currentATKTime;

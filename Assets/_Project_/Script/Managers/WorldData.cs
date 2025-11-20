@@ -9,6 +9,7 @@ namespace FXnRXn
     {
         public static List<PlayerStatSO> playerStatSOList = new List<PlayerStatSO>();
         public static List<EnemyStatSO> enemyStatSOList = new List<EnemyStatSO>();
+        public static List<SkillAttributeEntity> skillAttributeData = new List<SkillAttributeEntity>();
         
         private static int _worldLevel = 1;
 

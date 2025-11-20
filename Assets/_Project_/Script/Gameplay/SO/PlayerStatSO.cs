@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace FXnRXn
 {
@@ -9,5 +10,7 @@ namespace FXnRXn
 		public float hp;
 		public int nextExp;
 		public float moveSpeed;
+
+		
 	}
 }

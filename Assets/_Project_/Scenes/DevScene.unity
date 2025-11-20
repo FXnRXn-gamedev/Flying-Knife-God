@@ -2660,7 +2660,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &68810732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2969,7 +2969,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &76666363
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9669,7 +9669,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &253371920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17427,6 +17427,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9104559887315540680, guid: 7b6e4c91e703453c8f0cfbf3278b737b, type: 3}
   m_PrefabInstance: {fileID: 494798544}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &496009847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496009848}
+  - component: {fileID: 496009849}
+  m_Layer: 0
+  m_Name: Skill-Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496009848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496009847}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &496009849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496009847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf274dac651085249a4347f21c88bfac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.SkillPool
+  initialSize: 10
+  maxSize: 30
 --- !u!1001 &497437521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18053,7 +18099,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &509280899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21134,7 +21180,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &594240698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38928,7 +38974,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1073830767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41656,6 +41702,38 @@ Transform:
   - {fileID: 1139688742}
   m_Father: {fileID: 1587950419}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1144222858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1144222859}
+  m_Layer: 0
+  m_Name: Skill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1144222859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144222858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1703866394}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1145886422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42925,7 +43003,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1172353245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46244,7 +46322,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1267476236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53418,7 +53496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa00bdd28f486c4180772b0cd628983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.InventoryManager
-  _enemyDataSO: []
+  _enemyStatSO: []
+  _playerStatSO: []
+  skillList: []
 --- !u!1001 &1494311076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60761,6 +60841,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6c3468bde6f259a4aaa051930d73d414, type: 3}
   m_PrefabInstance: {fileID: 1701160179}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1703866393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1703866394}
+  - component: {fileID: 1703866395}
+  m_Layer: 0
+  m_Name: Blender
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1703866394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703866393}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1144222859}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1703866395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703866393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e392fdce32963ee409fb0a05660a2fe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.BlenderManager
+  speed: 10
+  gravity: 10
+  offPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &1708130441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67394,6 +67521,37 @@ Transform:
   - {fileID: 651130777}
   m_Father: {fileID: 1918814161}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1902127232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1902127233}
+  m_Layer: 0
+  m_Name: --------------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1902127233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902127232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1905597280
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72309,7 +72467,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 200, y: 1, z: 200}
-  m_Center: {x: 0, y: -5, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2039540096
 GameObject:
   m_ObjectHideFlags: 0
@@ -74929,7 +75087,7 @@ MonoBehaviour:
   hasEnemyLifetime: 0
   enemyLifetime: 30
   wantMaxActiveEnemies: 1
-  maxActiveEnemies: 5
+  maxActiveEnemies: 25
 --- !u!1001 &2124071655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82124,7 +82282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.WeaponRotate
   rotateSpeed: 200
   knifeRadius: 3
-  knifesCount: 4
+  knifesCount: 2
   weaponPart: {fileID: 3818571522584795017}
   targetParent: {fileID: 1676508567}
 --- !u!4 &5015809045135312920
@@ -83469,13 +83627,16 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 1751285275}
   - {fileID: 1935408257}
+  - {fileID: 1902127233}
   - {fileID: 1932426373}
   - {fileID: 8951183384964888610}
+  - {fileID: 1144222859}
   - {fileID: 35379135}
   - {fileID: 2123237573}
   - {fileID: 230099495}
   - {fileID: 1045009533}
   - {fileID: 1648197405}
+  - {fileID: 496009848}
   - {fileID: 1356186450}
   - {fileID: 1676508568}
   - {fileID: 911108206}

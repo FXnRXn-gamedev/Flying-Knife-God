@@ -5,10 +5,10 @@ using NaughtyAttributes;
 
 namespace FXnRXn
 {
-    public class Weapon : MonoBehaviour
+    public class WeaponTrigger : MonoBehaviour
     {
         #region Singleton
-		public static Weapon Instance { get; private set; }
+		public static WeaponTrigger Instance { get; private set; }
 
 		private void Awake()
 		{
@@ -18,9 +18,6 @@ namespace FXnRXn
 		#endregion
 
         #region Properties
-
-        // [Header("Settings")]
-        // [HorizontalLine(color: EColor.Green)]
         public int weaponATKDamage { get; set; } = 1;
 
 

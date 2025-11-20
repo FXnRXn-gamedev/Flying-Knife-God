@@ -4,10 +4,10 @@ using NaughtyAttributes;
 
 namespace FXnRXn
 {
-    public class WeaponRotate : MonoBehaviour
+    public class KnifeWeapon : MonoBehaviour
     {
         #region Singleton
-		public static WeaponRotate Instance { get; private set; }
+		public static KnifeWeapon Instance { get; private set; }
 
 		private void Awake()
 		{
@@ -39,7 +39,7 @@ namespace FXnRXn
 
         private void Update()
         {
-	        if (GameManager.Instance != null && GameManager.Instance.GameState == EGameState.GameStart)
+	        if (GameManager.Instance != null && GameManager.Instance.currentGameState == EGameState.GameStart)
 	        {
 		        transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
 		        if(targetParent != null) transform.position = targetParent.transform.position;
@@ -69,7 +69,7 @@ namespace FXnRXn
 		        GameObject weapon = Instantiate(Resources.Load<GameObject>("Weapon/SmallKnife"));
 		        weapon.transform.SetParent(transform);
 
-		        Weapon wp = weapon.GetComponent<Weapon>();
+		        WeaponTrigger wp = weapon.GetComponent<WeaponTrigger>();
 		        if (wp == null) return;
 		        wp.weaponATKDamage = 1;
 		        

@@ -1,0 +1,503 @@
+[
+
+  {
+    "SkillID": 1,
+    "SkillName": "Mixer",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 5,
+        "Num3": 20,
+        "Num4": 150
+      },
+      {
+        "Level": 2,
+        "Num1": 2,
+        "Num2": 5,
+        "Num3": 25,
+        "Num4": 150
+      },
+      {
+        "Level": 3,
+        "Num1": 3,
+        "Num2": 5,
+        "Num3": 30,
+        "Num4": 200
+      },
+      {
+        "Level": 4,
+        "Num1": 4,
+        "Num2": 4,
+        "Num3": 35,
+        "Num4": 200
+      },
+      {
+        "Level": 5,
+        "Num1": 5,
+        "Num2": 4,
+        "Num3": 37,
+        "Num4": 200
+      },
+      {
+        "Level": 6,
+        "Num1": 6,
+        "Num2": 4,
+        "Num3": 42,
+        "Num4": 250
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 2,
+    "SkillName": "Boomerang",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 4,
+        "Num3": 5,
+        "Num4": 20
+      },
+      {
+        "Level": 2,
+        "Num1": 2,
+        "Num2": 4,
+        "Num3": 5,
+        "Num4": 25
+      },
+      {
+        "Level": 3,
+        "Num1": 3,
+        "Num2": 5,
+        "Num3": 5,
+        "Num4": 30
+      },
+      {
+        "Level": 4,
+        "Num1": 4,
+        "Num2": 5,
+        "Num3": 4,
+        "Num4": 35
+      },
+      {
+        "Level": 5,
+        "Num1": 5,
+        "Num2": 6,
+        "Num3": 4,
+        "Num4": 35
+      },
+      {
+        "Level": 6,
+        "Num1": 6,
+        "Num2": 6,
+        "Num3": 4,
+        "Num4": 40
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 3,
+    "SkillName": "Chainsaw",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 1,
+        "Num3": 6,
+        "Num4": 150
+      },
+      {
+        "Level": 2,
+        "Num1": 1,
+        "Num2": 1,
+        "Num3": 6,
+        "Num4": 150
+      },
+      {
+        "Level": 3,
+        "Num1": 2,
+        "Num2": 2,
+        "Num3": 6,
+        "Num4": 150
+      },
+      {
+        "Level": 4,
+        "Num1": 2,
+        "Num2": 2,
+        "Num3": 5,
+        "Num4": 150
+      },
+      {
+        "Level": 5,
+        "Num1": 3,
+        "Num2": 3,
+        "Num3": 5,
+        "Num4": 150
+      },
+      {
+        "Level": 6,
+        "Num1": 3,
+        "Num2": 3,
+        "Num3": 5,
+        "Num4": 150
+      }
+      
+
+    ]
+  },
+  {
+    "SkillID": 4,
+    "SkillName": "Drone",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 7,
+        "Num3": 10,
+        "Num4": 300
+      },
+      {
+        "Level": 2,
+        "Num1": 2,
+        "Num2": 7,
+        "Num3": 10,
+        "Num4": 320
+      },
+      {
+        "Level": 3,
+        "Num1": 3,
+        "Num2": 7,
+        "Num3": 10,
+        "Num4": 320
+      },
+      {
+        "Level": 4,
+        "Num1": 4,
+        "Num2": 8,
+        "Num3": 9,
+        "Num4": 350
+      },
+      {
+        "Level": 5,
+        "Num1": 4,
+        "Num2": 8,
+        "Num3": 9,
+        "Num4": 350
+      },
+      {
+        "Level": 6,
+        "Num1": 5,
+        "Num2": 10,
+        "Num3": 9,
+        "Num4":400
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 5,
+    "SkillName": "ParingKnife",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 10,
+        "Num3": 20,
+        "Num4": 150
+      },
+      {
+        "Level": 2,
+        "Num1": 2,
+        "Num2": 10,
+        "Num3": 20,
+        "Num4": 150
+      },
+      {
+        "Level": 3,
+        "Num1": 3,
+        "Num2": 10,
+        "Num3": 25,
+        "Num4": 150
+      },
+      {
+        "Level": 4,
+        "Num1": 4,
+        "Num2": 8,
+        "Num3": 30,
+        "Num4": 150
+      },
+      {
+        "Level": 5,
+        "Num1": 5,
+        "Num2": 8,
+        "Num3": 35,
+        "Num4": 150
+      },
+      {
+        "Level": 6,
+        "Num1": 6,
+        "Num2": 7,
+        "Num3": 50,
+        "Num4": 150
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 6,
+    "SkillName": "Katana",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 1,
+        "Num3": 8,
+        "Num4": 8
+      },
+      {
+        "Level": 2,
+        "Num1": 2,
+        "Num2": 1,
+        "Num3": 8,
+        "Num4": 8
+      },
+      {
+        "Level": 3,
+        "Num1": 3,
+        "Num2": 1,
+        "Num3": 8,
+        "Num4": 8
+      },
+      {
+        "Level": 4,
+        "Num1": 4,
+        "Num2": 2,
+        "Num3": 10,
+        "Num4": 7
+      },
+      {
+        "Level": 5,
+        "Num1": 5,
+        "Num2": 2,
+        "Num3": 10,
+        "Num4": 7
+      },
+      {
+        "Level": 6,
+        "Num1": 6,
+        "Num2": 2,
+        "Num3": 10,
+        "Num4": 7
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 7,
+    "SkillName": "Knife",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 1,
+        "Num3": 5,
+        "Num4": 200
+      },
+      {
+        "Level": 2,
+        "Num1": 2,
+        "Num2": 1,
+        "Num3": 5,
+        "Num4": 200
+      },
+      {
+        "Level": 3,
+        "Num1": 3,
+        "Num2": 1,
+        "Num3": 5,
+        "Num4": 250
+      },
+      {
+        "Level": 4,
+        "Num1": 4,
+        "Num2": 2,
+        "Num3": 5,
+        "Num4": 250
+      },
+      {
+        "Level": 5,
+        "Num1": 5,
+        "Num2": 2,
+        "Num3": 7,
+        "Num4": 250
+      },
+      {
+        "Level": 6,
+        "Num1": 6,
+        "Num2": 2,
+        "Num3": 7,
+        "Num4": 300
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 8,
+    "SkillName": "HP",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 10,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 2,
+        "Num1": 20,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 3,
+        "Num1": 30,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 4,
+        "Num1": 40,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 5,
+        "Num1": 50,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 6,
+        "Num1": 60,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 9,
+    "SkillName": "PhysicalStrength",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 1,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 2,
+        "Num1": 2,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 3,
+        "Num1": 3,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 4,
+        "Num1": 4,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 5,
+        "Num1": 5,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 6,
+        "Num1": 6,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      }
+
+
+    ]
+  },
+  {
+    "SkillID": 10,
+    "SkillName": "Knowledge",
+    "Data": [
+      {
+        "Level": 1,
+        "Num1": 30,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 2,
+        "Num1": 35,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 3,
+        "Num1": 40,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 4,
+        "Num1": 45,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 5,
+        "Num1": 50,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      },
+      {
+        "Level": 6,
+        "Num1": 60,
+        "Num2": 0,
+        "Num3": 0,
+        "Num4": 150
+      }
+
+
+    ]
+  }
+]

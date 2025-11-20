@@ -26,7 +26,7 @@ namespace FXnRXn
         public Dictionary<UIType, GameObject> UIObject = new Dictionary<UIType, GameObject>();
 
         
-
+        public Action OnSkill1ButtonClick;
         #endregion
 
         #region Unity Callbacks
@@ -34,11 +34,6 @@ namespace FXnRXn
         private void Start()
         {
 	        InitData();
-        }
-
-        private void Update()
-        {
-	        
         }
 
         #endregion
@@ -110,6 +105,9 @@ namespace FXnRXn
 				case UIType.HPSliderPanel:
 					panelName = "HPSlider-Panel";
 					break;
+				case UIType.SkillPanel:
+					panelName = "Skill-Panel";
+					break;
 			}
 			return panelName;
 		}
@@ -140,7 +138,8 @@ namespace FXnRXn
 	    GamePanel,
 	    JoystickRoot,
 	    LevelAndSkillPanel,
-	    HPSliderPanel
+	    HPSliderPanel,
+	    SkillPanel
     }
 }
 

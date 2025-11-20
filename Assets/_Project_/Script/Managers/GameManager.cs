@@ -24,8 +24,9 @@ namespace FXnRXn
         [HorizontalLine(color: EColor.Green)]
         [ReadOnly] [SerializeField] private int targetFPS = 120;
         
-        public EGameState GameState { get; set; }
-        public Action<EGameState> GameStateAction;
+        public EGameState currentGameState { get; set; }
+        public Action<EGameState> OnGameStateChanged;
+        
         #endregion
 
         #region Unity Callbacks
@@ -58,14 +59,22 @@ namespace FXnRXn
 		        
 		        GameObject hpPanel = UIManager.Instance.ShowUIPanel(UIType.HPSliderPanel);
 		        hpPanel.GetComponent<UIMove>().InitData();
+		        
+		        GameObject skillPanel = UIManager.Instance.ShowUIPanel(UIType.SkillPanel);
+		        skillPanel.GetComponent<SkillUI>().InitData();
 	        }
 	        
         }
 
+        public void GameOver()
+        {
+	        SetGameState(EGameState.GameOver);
+        }
+
         public void SetGameState(EGameState state)
         {
-	        GameStateAction?.Invoke(state);
-	        GameState = state;
+	        OnGameStateChanged?.Invoke(state);
+	        currentGameState = state;
         }
         
         public void AddPlayerExp(int value)
@@ -82,6 +91,7 @@ namespace FXnRXn
         {
 	        WorldData.WorldLevel += 1;
 	       if(PlayerManager.Instance != null) PlayerManager.Instance.InitData();
+	       if (BlenderManager.Instance != null) BlenderManager.Instance.GetSkillData(1, WorldData.WorldLevel);
         }
         
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7193068290351275917}
   - component: {fileID: 4337041961720934963}
   - component: {fileID: 4739676856062695518}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: SmallKnife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,10 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109dd2355b38d10488c7550b90f339bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FXnRXn.WeaponOrbitalKnife
-  rotateSpeed: 10
-  knifeRadius: 3
-  knifesCount: 0
-  weaponPart: {fileID: 0}
 --- !u!1 &7771942143318540471
 GameObject:
   m_ObjectHideFlags: 0

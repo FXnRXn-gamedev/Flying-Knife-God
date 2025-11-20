@@ -79,7 +79,7 @@ namespace FXnRXn
 
         private void Update()
         {
-	        if (JoyStickController.Instance != null)
+	        if (JoyStickController.Instance != null) //  && JoyStickController.Instance.GetMoveAxis().magnitude > 0.1f
 	        {
 		        Move(JoyStickController.Instance.GetMoveAxis());
 	        }
@@ -217,6 +217,15 @@ namespace FXnRXn
 	        if (currentHP > maxHP) currentHP = maxHP;
 	        
 	        UIMove.Instance.UpdateHPUISlider(currentHP, maxHP);
+        }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+	        if (hit.gameObject.CompareTag("Enemy"))
+	        {
+		        if (hit.gameObject.GetComponent<EnemyController>() != null)
+			        ResetHP(hit.gameObject.GetComponent<EnemyController>().enemyATK);
+	        }
         }
 
         #endregion
